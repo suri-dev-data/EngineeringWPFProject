@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="EngineeringApplication.UControlGenericDataTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EngineeringApplication"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1100">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5" Height="25">
+            <Label Content="Configuration" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="Black"/>
+            <ComboBox x:Name="ComboType" Width="200" Margin="0,0,5,0">
+                <ComboBoxItem Content="Top Riser 1"/>
+                <ComboBoxItem Content="Top Riser 2"/>
+                <ComboBoxItem Content="Flowline 1"/>
+                <ComboBoxItem Content="Bottom Riser 1"/>
+            </ComboBox>
+            <Label Content="File Path" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="Black"/>
+            <TextBox x:Name="lblFilePath" Width="400" Margin="0,0,5,0" VerticalAlignment="Center" />
+            <Button Content="Add" Click="BtnSelectFile_Click" Width="40" FontSize="8" Height="20"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" x:Name="MainDataGrid" 
+              AutoGenerateColumns="False"
+              AllowDrop="True" 
+              Drop="DataGrid_Drop"
+              SelectionMode="Single"
+              CanUserAddRows="False"
+              CanUserSortColumns="False"
+              RowHeight="30"
+              ItemsSource="{Binding LayersCollection}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Layer" IsReadOnly="True" Binding="{Binding LayerType}" Width="*"/>
+                <DataGridTextColumn Header="Mat." IsReadOnly="False" Binding="{Binding Material}" Width="*"/>
+                <DataGridTextColumn Header="Wires" IsReadOnly="False" Binding="{Binding Wires}" Width="*"/>
+                <DataGridTextColumn Header="Ang." IsReadOnly="False" Binding="{Binding Angle}" Width="Auto"/>
+                <DataGridTextColumn Header="Prof." IsReadOnly="False" Binding="{Binding Profile}" Width="*"/>
+                <DataGridTextColumn Header="Thick" IsReadOnly="False" Binding="{Binding Thick}" Width="Auto"/>
+                <DataGridTextColumn Header="ID" IsReadOnly="False" Binding="{Binding ID}" Width="Auto"/>
+                <DataGridTextColumn Header="OD" IsReadOnly="False" Binding="{Binding OD}" Width="Auto"/>
+
+                <DataGridTemplateColumn Header="Actions" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="BtnCopy" Content="Copy" Click="BtnAction_Click" Margin="2" Width="50" FontSize="9"/>
+                                <Button x:Name="BtnDel" Content="Del" Click="BtnAction_Click" Margin="2" Width="40" FontSize="9" Background="IndianRed"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

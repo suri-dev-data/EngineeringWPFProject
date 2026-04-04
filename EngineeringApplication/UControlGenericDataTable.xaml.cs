@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -112,16 +113,59 @@ namespace EngineeringApplication
     /// Represents the physical properties of a single pipe or cable layer.
     /// Acts as the DTO (Data Transfer Object) for the engineering specifications.
     /// </summary>
-    public class LayerModel
+    public class LayerModel : INotifyPropertyChanged
     {
+        private double _thick;
+        private double _id;
+        private double _od;
+
         public string LayerType { get; set; } = string.Empty;
         public string Material { get; set; } = string.Empty;
         public int Wires { get; set; }
         public double Angle { get; set; }
         public string Profile { get; set; } = string.Empty;
-        public double Thick { get; set; }
-        public double ID { get; set; }
-        public double OD { get; set; }
+        public double Thick
+        {
+            get => _thick;
+            set
+            {
+                _thick = value;
+                OnPropertyChanged();
+                UpdateOD();
+            }
+        }
+
+        public double ID
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+                UpdateOD();
+            }
+        }
+
+        public double OD
+        {
+            get => _od;
+            set
+            {
+                _od = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void UpdateOD()
+        {
+            OD = ID + (2 * Thick);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 
     /// <summary>

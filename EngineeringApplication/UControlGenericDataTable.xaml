@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EngineeringApplication"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1100">
+             d:MinHeight="450" d:MinWidth="1100">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,16 +13,16 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5" Height="25">
-            <Label Content="Configuration" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="Black"/>
-            <ComboBox x:Name="ComboType" Width="200" Margin="0,0,5,0">
-                <ComboBoxItem Content="Top Riser 1"/>
-                <ComboBoxItem Content="Top Riser 2"/>
-                <ComboBoxItem Content="Flowline 1"/>
-                <ComboBoxItem Content="Bottom Riser 1"/>
+            <Label Content="Import Layer from Template" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="Black"/>
+            <ComboBox x:Name="ComboType" MinWidth="200" Margin="0,0,5,0">
+                <ComboBoxItem Content="Product A Riser"/>
+                <ComboBoxItem Content="Product A Flowline"/>
+                <ComboBoxItem Content="Product B Riser"/>
+                <ComboBoxItem Content="Product B Flowline"/>
             </ComboBox>
-            <Label Content="File Path" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="Black"/>
-            <TextBox x:Name="lblFilePath" Width="400" Margin="0,0,5,0" VerticalAlignment="Center" />
-            <Button Content="Add" Click="BtnSelectFile_Click" Width="40" FontSize="8" Height="20"/>
+            <Label Content="Import Pipe Structure XML" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="Black"/>
+            <TextBox x:Name="lblFilePath" MinWidth="400" Margin="0,0,5,0" VerticalAlignment="Center" />
+            <Button Content="Browse" Click="BtnSelectFile_Click" MinWidth="60" FontSize="12" Height="25"/>
         </StackPanel>
 
         <DataGrid Grid.Row="1" x:Name="MainDataGrid" 
@@ -35,16 +35,66 @@
               RowHeight="30"
               ItemsSource="{Binding LayersCollection}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Layer" IsReadOnly="True" Binding="{Binding LayerType}" Width="*"/>
-                <DataGridTextColumn Header="Mat." IsReadOnly="False" Binding="{Binding Material}" Width="*"/>
-                <DataGridTextColumn Header="Wires" IsReadOnly="False" Binding="{Binding Wires}" Width="*"/>
-                <DataGridTextColumn Header="Ang." IsReadOnly="False" Binding="{Binding Angle}" Width="Auto"/>
-                <DataGridTextColumn Header="Prof." IsReadOnly="False" Binding="{Binding Profile}" Width="*"/>
-                <DataGridTextColumn Header="Thick" IsReadOnly="False" Binding="{Binding Thick}" Width="Auto"/>
-                <DataGridTextColumn Header="ID" IsReadOnly="False" Binding="{Binding ID}" Width="Auto"/>
-                <DataGridTextColumn Header="OD" IsReadOnly="False" Binding="{Binding OD}" Width="Auto"/>
+                <DataGridTextColumn Header="Layer" IsReadOnly="True" Binding="{Binding LayerType}" Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="{DynamicResource Win98InputBackgroundBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Win98MediumShadowBrush}"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridComboBoxColumn Header="Material" 
+                        Width="Auto"
+                        SelectedItemBinding="{Binding Material, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource">
+                                <Setter.Value>
+                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <sys:String>Carbon Steel</sys:String>
+                                        <sys:String>Stainless Steel</sys:String>
+                                        <sys:String>Nylon 11</sys:String>
+                                        <sys:String>HDPE</sys:String>
+                                        <sys:String>RILSAN</sys:String>
+                                    </x:Array>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource">
+                                <Setter.Value>
+                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <sys:String>Carbon Steel</sys:String>
+                                        <sys:String>Stainless Steel</sys:String>
+                                        <sys:String>Nylon 11</sys:String>
+                                        <sys:String>HDPE</sys:String>
+                                        <sys:String>RILSAN</sys:String>
+                                    </x:Array>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsDropDownOpen" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Wires" IsReadOnly="False" Binding="{Binding Wires}" Width="Auto"/>
+                <DataGridTextColumn Header="Angle" IsReadOnly="False" Binding="{Binding Angle}" Width="Auto"/>
+                <DataGridTextColumn Header="Profile" IsReadOnly="False" Binding="{Binding Profile}" Width="Auto"/>
+                <DataGridTextColumn Header="Thick" Binding="{Binding Thick, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="OD" IsReadOnly="True" Binding="{Binding OD}" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="{DynamicResource Win98InputBackgroundBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Win98MediumShadowBrush}"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
 
-                <DataGridTemplateColumn Header="Actions" Width="*">
+                <DataGridTemplateColumn Header="Actions" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

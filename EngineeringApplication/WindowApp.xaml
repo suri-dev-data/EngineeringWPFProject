@@ -5,90 +5,130 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EngineeringApplication"
         mc:Ignorable="d"
-        Title="Engineering Application" Height="480" Width="1300" 
-        ResizeMode="NoResize"
-        Topmost="True">
+        Title="Engineering Application" 
+        Background="Transparent"
+        WindowStyle="ThreeDBorderWindow"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="560"
+        MinWidth="1480">
 
-    <Grid>
-
-        <Border 
-            BorderThickness="1,1,1,1"  Margin="10,10,10,10">
+        <Border Margin="0,0,0,0" CornerRadius="10" >
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
 
-                <Border Grid.Row="0" Grid.Column="0" Width="200" Height="410"
-                    BorderThickness="1,1,1,1" VerticalAlignment="Top" 
-                    HorizontalAlignment="Left" Margin="5,5,0,0">
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Project Details" 
-                                   FontWeight="Bold"  
-                                   TextAlignment="Center" FontSize="20"/>
 
-                            <Label Content="Project Code:" Margin="0,20,0,0"/>
-                            <TextBox Text="PROJ-2026-X" Margin="0,0,0,2"/>
 
-                            <Label Content="Project Name:" />
-                            <TextBox AcceptsReturn="True" 
-                            Height="80" 
-                            VerticalContentAlignment="Top" 
-                            TextWrapping="Wrap"
-                            Text="Random Project Name"/>
+            <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Margin="10,0">
+                <local:UControlUserTab x:Name="UserTab" />
+            </Border>
 
-                            <Label Content="Operator:" />
-                            <Border BorderThickness="1">
+
+                <StackPanel Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <local:UControlLoadingStepsBar x:Name="EngineeringProgress"  />
+                </StackPanel>
+
+
+                <Border Grid.Row="1" Grid.Column="1" Width="200" MinHeight="410"
+                BorderThickness="1,1,0,1" VerticalAlignment="Stretch" 
+                HorizontalAlignment="Left" Margin="5,5,0,5" CornerRadius="10">
+
+                    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled">
+                        <Grid Margin="10" MinHeight="400">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="Project Details" 
+                   FontWeight="Bold"  
+                   TextAlignment="Center" FontSize="20" Margin="0,0,0,10"/>
+
+                            <Label Grid.Row="1" Content="Project Code:" VerticalAlignment="Bottom"/>
+                            <TextBox Grid.Row="2" Text="XXXXX" Margin="0,0,0,5" 
+                 VerticalContentAlignment="Center" MinHeight="25"/>
+
+                            <Label Grid.Row="3" Content="Project Name:" VerticalAlignment="Bottom"/>
+                            <TextBox Grid.Row="4" AcceptsReturn="True" 
+                 TextWrapping="Wrap"
+                 Text="Random Project Name"
+                 VerticalContentAlignment="Top"
+                 Margin="0,0,0,5"
+                 MinHeight="60"/>
+
+                            <Label Grid.Row="5" Content="Engineer:" VerticalAlignment="Bottom"/>
+                        <Border Grid.Row="6" BorderThickness="1" BorderBrush="Gray" Margin="0,0,0,5" CornerRadius="10">
                                 <ComboBox x:Name="ComboOperador" 
-                                    Margin="0" 
-                                    SelectedIndex="0"
-                                    Height="22" 
-                                    BorderThickness="0">
-
+                      SelectedIndex="0"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      BorderThickness="0">
                                     <ComboBoxItem Content="Vinícius"/>
                                     <ComboBoxItem Content="Takey"/>
                                     <ComboBoxItem Content="Julia"/>
                                 </ComboBox>
                             </Border>
 
-                            <Label Content="Buyer:"/>
-                            <TextBox Text="Vinícius" Margin="0,0,0,2"/>
-
-                        </StackPanel>
+                            <Label Grid.Row="7" Content="Buyer:" VerticalAlignment="Bottom"/>
+                            <TextBox Grid.Row="8" Text="Petrobras" VerticalContentAlignment="Center" MinHeight="25"/>
+                        </Grid>
                     </ScrollViewer>
                 </Border>
-                <Border Grid.Row="0" Grid.Column="1" 
-                    BorderThickness="0,0,0,0" VerticalAlignment="Top" 
-                    HorizontalAlignment="Left" >
-                    <StackPanel>
-                        <local:UControlVerticalOptions x:Name="LocalVerticalOptions" CloseOtherVerticalOptions="ACloseB" />
-                    </StackPanel>
+                <Border Grid.Row="1" Grid.Column="2" 
+                    BorderThickness="0,0,0,0" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Left" Margin="0,0,0,5"  >
+                    <local:UControlVerticalOptions x:Name="LocalVerticalOptions" CloseOtherVerticalOptions="ACloseB"/>
                 </Border>
-                <Border  Grid.Row="0" Grid.Column="2"
-                    BorderThickness="0,0,0,0" VerticalAlignment="Top" 
-                    HorizontalAlignment="Left"  >
-                    <StackPanel>
-                        <local:UControlProjRefVerticalOptions x:Name="LocalPRVerticalOptions" CloseOtherVerticalOptions="BCloseA" />
-                    </StackPanel>
+                <Border  Grid.Row="1" Grid.Column="3"
+                    BorderThickness="0,0,0,0" VerticalAlignment="Stretch" 
+                    HorizontalAlignment="Left" Margin="0,0,0,5"  >
+                    <local:UControlProjRefVerticalOptions x:Name="LocalPRVerticalOptions" CloseOtherVerticalOptions="BCloseA"/>
                 </Border>
 
-                <Border Grid.Row="0" Grid.Column="3"
-                    Height="360"
-                    BorderThickness="1,1,1,1" VerticalAlignment="Top" 
-                    HorizontalAlignment="Left" Margin="0,5,5,5" >
+                <Border Grid.Row="1" Grid.Column="4"
+                    MinHeight="360"
+                    BorderThickness="1,1,1,1" VerticalAlignment="Stretch" 
+                    HorizontalAlignment="Left" Margin="0,5,5,5" CornerRadius="10">
                     <WrapPanel x:Name="PainelDeModulos3" Orientation="Horizontal" VerticalAlignment="Top" Margin="10,0,0,0"/>
                 </Border>
-                <Button x:Name="ChangeStyleButton" Grid.Column="3" Grid.Row="1" Content="Change Style" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,10,10" Click="ChangeStyleButton_Click" Style="{StaticResource RoundToggleButtonStyle}"/>
-                <Button x:Name="SubmitButton" Grid.Column="3" Grid.Row="1" Content="Run Generic Analysis" Width="200" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="OpenAnalysis" Style="{StaticResource RoundToggleButtonStyle}"/>
+            <Grid Grid.Row="3" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="PDSDownloadXlsx" Grid.Column="0" Grid.Row="0" Content="Download PDS [XLSX]" MinWidth="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,10,10" Style="{StaticResource RoundToggleButtonStyle}"/>
+                <Button x:Name="PDSDownloadCsv" Grid.Column="1" Grid.Row="0" Content="Download PDS [CSV]" MinWidth="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,10,10" Style="{StaticResource RoundToggleButtonStyle}"/>
+                <Button x:Name="PDSDownloadXML" Grid.Column="2" Grid.Row="0" Content="Download PDS [XML]" MinWidth="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,10,10" Style="{StaticResource RoundToggleButtonStyle}"/>
+                <ComboBox x:Name="AnalysisTypeCombo" Grid.Column="3" Grid.Row="0" MinWidth="250" Height="25" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" SelectedIndex="0">
+                    <ComboBoxItem Content="Static Analysis"/>
+                    <ComboBoxItem Content="Dynamic Analysis"/>
+                    <ComboBoxItem Content="Fatigue Assessment"/>
+                </ComboBox>
+                <Button x:Name="SubmitButton" Grid.Column="4" Grid.Row="0" Content="Run Generic Analysis" MinWidth="200" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="OpenAnalysis" Style="{StaticResource RoundToggleButtonStyle}"/>
             </Grid>
-        </Border> 
-    </Grid>
 
+        </Grid>
+        </Border> 
 </Window>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EngineeringApplication"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500">
+             d:MinHeight="500" d:Width="32">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,8 +14,8 @@
         <Border x:Name="HorizontalDrawer"
                 BorderThickness="0,0,0,0" 
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Width="32" Height="410" Margin="0,5,0,0" Grid.RowSpan="2">
+                VerticalAlignment="Stretch"
+                Width="32" MinHeight="410" Margin="0,5,0,0" Grid.RowSpan="2" CornerRadius="10">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -24,9 +24,9 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="0" x:Name="DrawerHeader"  
-                        BorderThickness="1,1,1,1"
+                        BorderThickness="1,1,0,1"
                         Cursor="Hand"
-                        MouseLeftButtonDown="DrawerHeader_MouseLeftButtonDown">
+                        MouseLeftButtonDown="DrawerHeader_MouseLeftButtonDown" CornerRadius="10">
 
                     <Grid>
                         <Button x:Name="BtnToggle" 
@@ -51,7 +51,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" x:Name="DrawerContentHolder" Padding="10" Opacity="0">
+                <Border Grid.Column="1" x:Name="DrawerContentHolder" Padding="10" Opacity="0" BorderThickness="1,1,0,1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -71,8 +71,13 @@
                           RowHeaderWidth="0">
 
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn Header="Sel." Width="35" 
-                                        Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTemplateColumn Header="Sel." Width="35">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <RadioButton IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
                                 <DataGridTextColumn Header="Ref" Width="120" 
                                     Binding="{Binding Ref}" 

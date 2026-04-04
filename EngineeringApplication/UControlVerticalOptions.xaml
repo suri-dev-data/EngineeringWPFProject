@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EngineeringApplication"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500">
+             d:DesignWidth="40"
+             VerticalAlignment="Stretch">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,8 +15,8 @@
         <Border x:Name="HorizontalDrawer"
                 BorderThickness="0,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Width="32" Height="410" Margin="0,5,0,0" Grid.RowSpan="2">
+                VerticalAlignment="Stretch"
+                Width="32" MinHeight="410" Margin="0,5,0,0" Grid.RowSpan="2" CornerRadius="10">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -24,11 +25,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="0" x:Name="DrawerHeader"  
-                        BorderThickness="1,1,1,1"
+                        BorderThickness="1,1,0,1"
                         Cursor="Hand"
-                        MouseLeftButtonDown="DrawerHeader_MouseLeftButtonDown">
+                        MouseLeftButtonDown="DrawerHeader_MouseLeftButtonDown" VerticalAlignment="Stretch" CornerRadius="10">
 
-                    <Grid>
+                    <Grid VerticalAlignment="Stretch">
                         <Button x:Name="BtnToggle" 
                         Content="▶" 
                         HorizontalAlignment="Center" 
@@ -51,7 +52,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" x:Name="DrawerContentHolder" Padding="10" Opacity="0">
+                <Border Grid.Column="1" x:Name="DrawerContentHolder" Padding="10" Opacity="0" VerticalAlignment="Stretch" BorderThickness="1,1,0,1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -61,24 +62,30 @@
                         <Label Content="Select Pipe Layer Designs" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="0"/>
 
                         <DataGrid Grid.Row="1" 
-                          x:Name="DataGridSensores"
-                          AutoGenerateColumns="False" 
-                          CanUserAddRows="False"
-                          HeadersVisibility="Column"
-                          Background="White"
-                          GridLinesVisibility="Horizontal"
-                          SelectionMode="Single"
-                          RowHeaderWidth="0" >
+                                  x:Name="DataGridSensores"
+                                  AutoGenerateColumns="False" 
+                                  CanUserAddRows="False"
+                                  HeadersVisibility="Column"
+                                  Background="White"
+                                  SelectionMode="Single"
+                                  RowHeaderWidth="0"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto" >
 
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn Header="Sel." Width="35" 
-                                        Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTemplateColumn Header="Sel." Width="35">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <RadioButton IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                                <DataGridTextColumn Header="Name" Width="120" 
+                                <DataGridTextColumn Header="Name" Width="1*"
                                     Binding="{Binding Name}" 
                                     IsReadOnly="True"/>
 
-                                <DataGridTextColumn Header="Description" Width="300" 
+                                <DataGridTextColumn Header="Description" Width="2*"
                                     Binding="{Binding Description}" 
                                     IsReadOnly="True"/>
                             </DataGrid.Columns>

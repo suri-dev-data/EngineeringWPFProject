@@ -20,7 +20,11 @@ namespace EngineeringApplication
         public WindowApp()
         {
 
+
             InitializeComponent();
+
+            UserTab.ChangeStyle("ResourceModernStyle.xaml");
+
 
             EngineeringProgress.AnimateProgress(66.5);
 

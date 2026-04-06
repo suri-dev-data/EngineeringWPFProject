@@ -18,14 +18,14 @@ namespace EngineeringApplication
     /// </summary>
     public partial class UControlUserTab : UserControl
     {
-        private bool _isModern = false;
+        private bool _isModern = true;
         public UControlUserTab()
         {
             InitializeComponent();
         }
 
         // Swaps global ResourceDictionaries to enable live theme switching
-        private void ChangeStyle(string styleFile)
+        public void ChangeStyle(string styleFile)
         {
             var dictParaRemover = Application.Current.Resources.MergedDictionaries
                 .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.EndsWith("Style.xaml"));

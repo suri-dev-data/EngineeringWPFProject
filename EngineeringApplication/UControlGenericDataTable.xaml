@@ -45,7 +45,7 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridComboBoxColumn Header="Material" 
-                        Width="Auto"
+                        Width="*"
                         SelectedItemBinding="{Binding Material, UpdateSourceTrigger=PropertyChanged}">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
@@ -62,7 +62,7 @@
                             </Setter>
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
-                    <DataGridComboBoxColumn.EditingElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle >
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource">
                                 <Setter.Value>
@@ -81,7 +81,7 @@
                 </DataGridComboBoxColumn>
                 <DataGridTextColumn Header="Wires" IsReadOnly="False" Binding="{Binding Wires}" Width="Auto"/>
                 <DataGridTextColumn Header="Angle" IsReadOnly="False" Binding="{Binding Angle}" Width="Auto"/>
-                <DataGridTextColumn Header="Profile" IsReadOnly="False" Binding="{Binding Profile}" Width="Auto"/>
+                <DataGridTextColumn Header="Profile" IsReadOnly="False" Binding="{Binding Profile}" Width="*"/>
                 <DataGridTextColumn Header="Thick" Binding="{Binding Thick, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
                 <DataGridTextColumn Header="OD" IsReadOnly="True" Binding="{Binding OD}" Width="Auto">
@@ -94,7 +94,7 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
 
-                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
